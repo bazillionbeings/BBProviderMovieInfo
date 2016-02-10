@@ -1,0 +1,23 @@
+{
+  "name": "bb-provider-movie-info",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bazillionbeings/BBProviderMovieInfo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bazillionbeings/BBProviderMovieInfo/issues"
+  },
+  "homepage": "https://github.com/bazillionbeings/BBProviderMovieInfo#readme",
+  "dependencies": {
+    "request": "^2.69.0",
+    "xml2js": "^0.4.16"
+  }
+}
