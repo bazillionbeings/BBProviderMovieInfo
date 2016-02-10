@@ -1,10 +1,8 @@
 'use strict';
 
 const request = require('request'),
+    config = require('./config'),
     xml2js = require('xml2js');
-
-const API_KEY = 'K2V379-3Q64H238K3',
-    URL = 'http://api.wolframalpha.com/v2/';
 
 class MovieInfoProvider {
     _processPlainText(text) {
@@ -22,7 +20,7 @@ class MovieInfoProvider {
     execute(name) {
         new Promise((resolve, reject) => {
             request.get({
-                url: `${URL}query?input=movie%20${name}&appid=${API_KEY}&podstate=BasicInformation:MovieData__More&includepodid=BasicInformation:MovieData&includepodid=Cast:MovieData&podstate=Cast:MovieData__More`,
+                url: `${config.URL}query?input=movie%20${name}&appid=${config.API_KEY}&podstate=BasicInformation:MovieData__More&includepodid=BasicInformation:MovieData&includepodid=Cast:MovieData&podstate=Cast:MovieData__More`,
                 json: true
             }, (err, httpResponse, body) => {
                 if (err) throw err;
