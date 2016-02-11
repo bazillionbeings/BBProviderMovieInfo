@@ -16,11 +16,18 @@ class MovieInfoProvider {
         }
         return result;
     }
+    
+    static get price() {
+        return config.price;
+    }
 
     execute(name) {
+        if (name == null || name.lenght === 0) {
+            throw {type: 'provider_error', data: {providerName: 'MovieInfoProvider', code: 1, name: 'invalid_movie_name', description: 'Movie name should have at least 1 character.'}};
+        }
         new Promise((resolve, reject) => {
             request.get({
-                url: `${config.URL}query?input=movie%20${name}&appid=${config.API_KEY}&podstate=BasicInformation:MovieData__More&includepodid=BasicInformation:MovieData&includepodid=Cast:MovieData&podstate=Cast:MovieData__More`,
+                url: `${config.apiUrl}query?input=movie%20${name}&appid=${config.apiKey}&podstate=BasicInformation:MovieData__More&includepodid=BasicInformation:MovieData&includepodid=Cast:MovieData&podstate=Cast:MovieData__More`,
                 json: true
             }, (err, httpResponse, body) => {
                 if (err) throw err;
