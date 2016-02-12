@@ -46,7 +46,7 @@ class MovieInfoProvider {
                         }                        
                         if (result.keys({}).length > 0) resolve(result);
                     }
-                    reject({type: 'provider_error', data: {providerName: 'MovieInfoProvider', code: 2, name: 'no_movie_match', description: 'No movie has been found by given name.'}});
+                    resolve();
                 });
             });
         });
