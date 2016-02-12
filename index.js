@@ -22,10 +22,10 @@ class MovieInfoProvider {
     }
 
     execute(name) {
-        if (name == null || name.lenght === 0) {
-            throw {type: 'provider_error', data: {providerName: 'MovieInfoProvider', code: 1, name: 'invalid_movie_name', description: 'Movie name should have at least 1 character.'}};
-        }
-        new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
+            if (name == null || name.lenght === 0) {
+                reject({type: 'provider_error', data: {providerName: 'MovieInfoProvider', code: 1, name: 'invalid_movie_name', description: 'Movie name should have at least 1 character.'}});
+            }
             request.get({
                 url: `${config.apiUrl}query?input=movie%20${name}&appid=${config.apiKey}&podstate=BasicInformation:MovieData__More&includepodid=BasicInformation:MovieData&includepodid=Cast:MovieData&podstate=Cast:MovieData__More`,
                 json: true
@@ -46,7 +46,7 @@ class MovieInfoProvider {
                         }                        
                         if (result.keys({}).length > 0) resolve(result);
                     }
-                    reject();
+                    reject({type: 'provider_error', data: {providerName: 'MovieInfoProvider', code: 2, name: 'no_movie_match', description: 'No movie has been found by given name.'}});
                 });
             });
         });
